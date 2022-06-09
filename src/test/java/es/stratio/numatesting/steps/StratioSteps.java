@@ -3,6 +3,8 @@ package es.stratio.numatesting.steps;
 import es.stratio.numatesting.browsers.BrowserDriverChrome;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +14,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,35 +24,80 @@ public class StratioSteps {
     By dropdown_solutions_stratio = By.xpath("//div[text()=' Solutions']");
     By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
     By first_use_case = By.xpath("//section[3]/div/a");
+    By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
     WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
-    @Given("google iniciado")
+    FluentWait wait = new FluentWait(webDriver);
+
+    @Given("browser initiated")
     public void googleIniciado() {
         webDriver.get("https://www.google.es/");
 
     }
 
-    @And("cookies aceptadas")
+    @And("google cookies accepted")
     public void cookiesAceptadas() throws InterruptedException {
         webDriver.findElement(button_accept_cookies_google).click();
+
+
+    }
+
+    @When("user types Stratio in search bar and press enter")
+    public void userTypesStratioInSearchBarAndPressEnter() {
         WebElement search_bar_element = this.webDriver.findElement(By.name("q"));
         search_bar_element.sendKeys("Stratio");
         search_bar_element.sendKeys(Keys.ENTER);
-        assertEquals("https://www.stratio.com/",webDriver.findElement(stratio_first_link).getAttribute("href"));
-        webDriver.findElement(stratio_first_link).click();
-        webDriver.findElement(button_accept_cookies_stratio).click();
-        assertEquals("Stratio ::Transform and build your digital strategy around Big Data and AI",webDriver.getTitle());
-        webDriver.findElement(dropdown_solutions_stratio).click();
-        webDriver.findElement(governance_dropdown).click();
+    }
 
-        FluentWait wait = new FluentWait(webDriver);
+    @Then("shows all results of Stratio")
+    public void showsAllResultsOfStratio() {
+        assertEquals("https://www.stratio.com/", webDriver.findElement(stratio_first_link).getAttribute("href"));
+    }
+
+
+    @When("user click first link")
+    public void userClickFirstLink() {
+        webDriver.findElement(stratio_first_link).click();
+    }
+
+    @And("accept stratio cookies")
+    public void acceptStratioCookies() {
+        webDriver.findElement(button_accept_cookies_stratio).click();
+    }
+
+    @Then("show Stratio Home page")
+    public void showStratioHomePage() {
+        assertEquals("Stratio ::Transform and build your digital strategy around Big Data and AI", webDriver.getTitle());
+    }
+
+
+    @When("user click the dropdown Solutions")
+    public void userClickTheDropdownSolutions() {
+        webDriver.findElement(dropdown_solutions_stratio).click();
+    }
+
+    @And("user select Governance from the dropdown")
+    public void userSelectGovernanceFromTheDropdown() {
+        webDriver.findElement(governance_dropdown).click();
+    }
+
+    @Then("Governance page loads")
+    public void governancePageLoads() {
+
         wait.withTimeout(Duration.ofMillis(5000));
         wait.pollingEvery(Duration.ofMillis(250));
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.titleIs("Stratio :: Data reliability is the base of successful companies"));
 
 
-        assertEquals("https://www.stratio.com/solutions/by-use-case/governance",webDriver.getCurrentUrl());
-        webDriver.findElement(first_use_case).click();
-
+        assertEquals("https://www.stratio.com/solutions/by-use-case/governance", webDriver.getCurrentUrl());
     }
+
+    @And("print first case title")
+    public void printFirstCaseTitle() {
+        webDriver.findElement(first_use_case).click();
+        wait.until(ExpectedConditions.titleIs("Stratio :: Real-time replica of Core banking data with business meaning, QR and governance"));
+        System.out.println(webDriver.findElement(tittle_of_first_element_of_use_case).getAccessibleName());
+    }
+
+
 }

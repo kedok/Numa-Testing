@@ -15,9 +15,6 @@ public class BrowserDriverChrome {
         WebDriverManager.chromedriver().setup();
         chromeDriver = new ChromeDriver();
         chromeDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(10));
-        //chromeDriver.get("https://www.google.com");
-
-
         return chromeDriver;
     }
 }
