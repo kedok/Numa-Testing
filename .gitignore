@@ -167,3 +167,8 @@ Temporary Items
 !/.idea/
 !/.idea/
 !/.idea/
+!/.idea/sonarlint/
+!/.idea/.gitignore
+!/.idea/misc.xml
+!/.idea/encodings.xml
+!/.idea/vcs.xml
