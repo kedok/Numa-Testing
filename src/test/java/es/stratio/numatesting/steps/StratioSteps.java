@@ -35,7 +35,7 @@ public class StratioSteps {
     }
 
     @And("google cookies accepted")
-    public void cookiesAceptadas() throws InterruptedException {
+    public void cookiesAceptadas() {
         webDriver.findElement(button_accept_cookies_google).click();
 
 
