@@ -21,8 +21,6 @@ public class StratioSteps {
     By dropdown_solutions_stratio = By.xpath("//div[text()=' Solutions']");
     By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
     By first_use_case = By.xpath("//section[3]/div/a");
-    By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
-    //    WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
     WebDriver webDriver = BrowserDriverFirefox.getFirefox();
     JavascriptExecutor js = (JavascriptExecutor) webDriver;
     FluentWait wait = new FluentWait(webDriver);
@@ -36,7 +34,6 @@ public class StratioSteps {
     @And("google cookies accepted")
     public void cookiesAceptadas() {
         webDriver.findElement(button_accept_cookies_google).click();
-
 
     }
 
@@ -59,27 +56,20 @@ public class StratioSteps {
 
     @When("user click first link")
     public void userClickFirstLink() {
-//        Actions actions = new Actions(webDriver);
         WebElement webElement = webDriver.findElement(stratio_first_link);
-//        actions.moveToElement(webElement).click().perform();
-
+        ;
         js.executeScript("arguments[0].click();", webElement);
 
-
-//        webDriver.findElement(stratio_first_link).click();
     }
 
     @And("accept stratio cookies")
     public void acceptStratioCookies() throws InterruptedException {
-
-//        Thread.sleep(10000);
         wait.withTimeout(Duration.ofMillis(10000));
         wait.pollingEvery(Duration.ofMillis(250));
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.elementToBeClickable(button_accept_cookies_stratio));
         WebElement webElement = webDriver.findElement(button_accept_cookies_stratio);
         js.executeScript("arguments[0].click();", webElement);
-//        webDriver.findElement(button_accept_cookies_stratio).click();
     }
 
     @Then("show Stratio Home page")
@@ -97,7 +87,6 @@ public class StratioSteps {
         wait.until(ExpectedConditions.titleIs("Stratio ::Transform and build your digital strategy around Big Data and AI"));
         WebElement webElement = webDriver.findElement(dropdown_solutions_stratio);
         js.executeScript("arguments[0].click();", webElement);
-//        webDriver.findElement(dropdown_solutions_stratio).click();
     }
 
     @And("user select Governance from the dropdown")
@@ -109,7 +98,6 @@ public class StratioSteps {
         wait.until(ExpectedConditions.elementToBeClickable(governance_dropdown));
         WebElement webElement = webDriver.findElement(governance_dropdown);
         js.executeScript("arguments[0].click();", webElement);
-//        webDriver.findElement(governance_dropdown).click();
     }
 
     @Then("Governance page loads")
