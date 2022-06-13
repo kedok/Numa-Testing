@@ -9,8 +9,8 @@ public class BrowserDriverFirefox {
 
     static WebDriver firefoxDriver;
 
-    public static WebDriver getFirefox(){
-        System.setProperty("webdriver.gecko.driver","./drivers/geckodriver");
+    public static WebDriver getFirefox() {
+        System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver");
 
         firefoxDriver = new FirefoxDriver();
         firefoxDriver.manage().timeouts().implicitlyWait(Duration.ofMillis(10));

@@ -1,13 +1,11 @@
 package es.stratio.numatesting.steps;
 
-import es.stratio.numatesting.browsers.BrowserDriverChrome;
 import es.stratio.numatesting.browsers.BrowserDriverFirefox;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -24,9 +22,9 @@ public class StratioSteps {
     By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
     By first_use_case = By.xpath("//section[3]/div/a");
     By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
-//    WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
+    //    WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
     WebDriver webDriver = BrowserDriverFirefox.getFirefox();
-    JavascriptExecutor js = (JavascriptExecutor)  webDriver;
+    JavascriptExecutor js = (JavascriptExecutor) webDriver;
     FluentWait wait = new FluentWait(webDriver);
 
     @Given("browser initiated")
@@ -65,7 +63,7 @@ public class StratioSteps {
         WebElement webElement = webDriver.findElement(stratio_first_link);
 //        actions.moveToElement(webElement).click().perform();
 
-        js.executeScript("arguments[0].click();",webElement);
+        js.executeScript("arguments[0].click();", webElement);
 
 
 //        webDriver.findElement(stratio_first_link).click();
@@ -80,7 +78,7 @@ public class StratioSteps {
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.elementToBeClickable(button_accept_cookies_stratio));
         WebElement webElement = webDriver.findElement(button_accept_cookies_stratio);
-        js.executeScript("arguments[0].click();",webElement);
+        js.executeScript("arguments[0].click();", webElement);
 //        webDriver.findElement(button_accept_cookies_stratio).click();
     }
 
@@ -98,7 +96,7 @@ public class StratioSteps {
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.titleIs("Stratio ::Transform and build your digital strategy around Big Data and AI"));
         WebElement webElement = webDriver.findElement(dropdown_solutions_stratio);
-        js.executeScript("arguments[0].click();",webElement);
+        js.executeScript("arguments[0].click();", webElement);
 //        webDriver.findElement(dropdown_solutions_stratio).click();
     }
 
@@ -110,7 +108,7 @@ public class StratioSteps {
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.elementToBeClickable(governance_dropdown));
         WebElement webElement = webDriver.findElement(governance_dropdown);
-        js.executeScript("arguments[0].click();",webElement);
+        js.executeScript("arguments[0].click();", webElement);
 //        webDriver.findElement(governance_dropdown).click();
     }
 
