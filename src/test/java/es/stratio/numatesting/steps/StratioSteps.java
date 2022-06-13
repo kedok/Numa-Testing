@@ -91,13 +91,27 @@ public class StratioSteps {
 
 
     @When("user click the dropdown Solutions")
-    public void userClickTheDropdownSolutions() {
-        webDriver.findElement(dropdown_solutions_stratio).click();
+    public void userClickTheDropdownSolutions() throws InterruptedException {
+        Thread.sleep(2000);
+        wait.withTimeout(Duration.ofMillis(10000));
+        wait.pollingEvery(Duration.ofMillis(250));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.titleIs("Stratio ::Transform and build your digital strategy around Big Data and AI"));
+        WebElement webElement = webDriver.findElement(dropdown_solutions_stratio);
+        js.executeScript("arguments[0].click();",webElement);
+//        webDriver.findElement(dropdown_solutions_stratio).click();
     }
 
     @And("user select Governance from the dropdown")
-    public void userSelectGovernanceFromTheDropdown() {
-        webDriver.findElement(governance_dropdown).click();
+    public void userSelectGovernanceFromTheDropdown() throws InterruptedException {
+        Thread.sleep(3000);
+        wait.withTimeout(Duration.ofMillis(10000));
+        wait.pollingEvery(Duration.ofMillis(250));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.elementToBeClickable(governance_dropdown));
+        WebElement webElement = webDriver.findElement(governance_dropdown);
+        js.executeScript("arguments[0].click();",webElement);
+//        webDriver.findElement(governance_dropdown).click();
     }
 
     @Then("Governance page loads")
@@ -116,7 +130,7 @@ public class StratioSteps {
     public void printFirstCaseTitle() {
         webDriver.findElement(first_use_case).click();
         wait.until(ExpectedConditions.titleIs("Stratio :: Real-time replica of Core banking data with business meaning, QR and governance"));
-        System.out.println(webDriver.findElement(tittle_of_first_element_of_use_case).getAccessibleName());
+        System.out.println(webDriver.getTitle());
     }
 
 
