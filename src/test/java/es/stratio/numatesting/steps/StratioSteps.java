@@ -1,14 +1,13 @@
 package es.stratio.numatesting.steps;
 
 import es.stratio.numatesting.browsers.BrowserDriverChrome;
+import es.stratio.numatesting.browsers.BrowserDriverFirefox;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -20,12 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StratioSteps {
     By button_accept_cookies_google = By.xpath("//div[text()='Acepto']/ancestor::button");
     By button_accept_cookies_stratio = By.xpath("//div[@class='controls']/button[1]");
-    By stratio_first_link = By.xpath("//h3[text()='Stratio ::Transform and build your digital strategy around ...']/ancestor::a");
+    By stratio_first_link = By.xpath("//h3/ancestor::a");
     By dropdown_solutions_stratio = By.xpath("//div[text()=' Solutions']");
     By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
     By first_use_case = By.xpath("//section[3]/div/a");
     By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
-    WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
+//    WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
+    WebDriver webDriver = BrowserDriverFirefox.getFirefox();
+    JavascriptExecutor js = (JavascriptExecutor)  webDriver;
     FluentWait wait = new FluentWait(webDriver);
 
     @Given("browser initiated")
@@ -50,18 +51,37 @@ public class StratioSteps {
 
     @Then("shows all results of Stratio")
     public void showsAllResultsOfStratio() {
+        wait.withTimeout(Duration.ofMillis(10000));
+        wait.pollingEvery(Duration.ofMillis(250));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.elementToBeClickable(stratio_first_link));
         assertEquals("https://www.stratio.com/", webDriver.findElement(stratio_first_link).getAttribute("href"));
     }
 
 
     @When("user click first link")
     public void userClickFirstLink() {
-        webDriver.findElement(stratio_first_link).click();
+//        Actions actions = new Actions(webDriver);
+        WebElement webElement = webDriver.findElement(stratio_first_link);
+//        actions.moveToElement(webElement).click().perform();
+
+        js.executeScript("arguments[0].click();",webElement);
+
+
+//        webDriver.findElement(stratio_first_link).click();
     }
 
     @And("accept stratio cookies")
-    public void acceptStratioCookies() {
-        webDriver.findElement(button_accept_cookies_stratio).click();
+    public void acceptStratioCookies() throws InterruptedException {
+
+//        Thread.sleep(10000);
+        wait.withTimeout(Duration.ofMillis(10000));
+        wait.pollingEvery(Duration.ofMillis(250));
+        wait.ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.elementToBeClickable(button_accept_cookies_stratio));
+        WebElement webElement = webDriver.findElement(button_accept_cookies_stratio);
+        js.executeScript("arguments[0].click();",webElement);
+//        webDriver.findElement(button_accept_cookies_stratio).click();
     }
 
     @Then("show Stratio Home page")
