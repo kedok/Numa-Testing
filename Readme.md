@@ -26,13 +26,84 @@ notación Gherkin, por ejemplo:
 
 `Scenario:` Login successful
 
-`Given` I enter a correct user
+&emsp;`Given` I enter a correct user
 
-`And` I enter a correct password
+&emsp;`And` I enter a correct password
 
-`When` I click on login button
+&emsp;`When` I click on login button
 
-`Then` I am redirected to user profile page
+&emsp;`Then` I am redirected to user profile page
+<br></br>
+
+### <center>Plan de pruebas
+
+`Background:`
+
+&emsp;`Given` web server running
+
+&emsp;`And` database running with already registered users
+
+&emsp;`And` login page loaded
+<br></br>
+
+`Scenario:` Login successful
+
+&emsp;`Given` I enter an email which contains @ and ends with .com
+
+&emsp;`And` I enter a password which length is between 6 and 8 characters and contains at least one capital letter, one lowercase and one number
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` I am redirected to my user profile page
+<br></br>
+
+`Scenario:` User not registered
+
+&emsp;`Given` I enter a not registered email/user in the system
+
+&emsp;`And` I enter a valid password
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "User not registered"
+
+&emsp;`And` I am redirected to link "register"
+<br></br>
+
+`Scenario:` Wrong password with valid user
+
+&emsp;`Given` I enter user which is already registered in the system
+
+&emsp;`And` I enter a wrong password
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "Wrong password"
+
+&emsp;`And` I am redirected to the login page
+<br></br>
+
+`Scenario:` Password not meet requirements
+
+&emsp;`Given` I enter user which is already registered in the system
+
+&emsp;`And` I enter a password which contains less than 6 characters or more than 18 characters, without one capital letter and without one number
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "The password does not meet the requirements"
+<br></br>
+
+`Scenario:` User not meet the requirements
+
+&emsp;`Given` I enter an email which not contains @ or not ends with .com
+
+&emsp;`And` I enter a valid password
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "The user does not meet the requirements"
+<br></br>
 
 ## Ejercicio 2: Selenium testing & BDD
 
