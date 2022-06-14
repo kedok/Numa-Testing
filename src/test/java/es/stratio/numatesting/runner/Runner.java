@@ -8,9 +8,16 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         plugin = {"pretty"},
         features = {"src/test/resources/features"},
-        glue = {"src/test/java/es/stratio/numatesting/steps"}
+        glue = {"es/stratio/numatesting/steps"}
         //tags = {"@Tag1"} //include(@)/exclude(@~)
 )
 
 public class Runner {
+
+//    public static void main(String[] args) throws Throwable {
+//        //String[] arguments = {"--glue", "path/to/glue/code","--glue", "Second/Path/to/glue code", "--tags","@test", path,"--plugin","pretty","--plugin","json:/path/to/report"};
+//        String[] arguments = {"--plugin", "html:build/reports/cucumber", "--glue", "es/stratio/numatesting/steps"};
+//        io.cucumber.core.cli.Main.main(arguments);
+//    }
+
 }

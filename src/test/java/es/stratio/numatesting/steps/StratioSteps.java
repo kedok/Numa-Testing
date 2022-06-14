@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StratioSteps {
     By button_accept_cookies_google = By.xpath("//div[text()='Acepto']/ancestor::button");
     By button_accept_cookies_stratio = By.xpath("//div[@class='controls']/button[1]");
-    By stratio_first_link = By.xpath("//h3[text()='Stratio ::Transform and build your digital strategy around ...']/ancestor::a");
+    By stratio_first_link = By.xpath("//h3/ancestor::a");
     By dropdown_solutions_stratio = By.xpath("//div[text()=' Solutions']");
     By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
     By first_use_case = By.xpath("//section[3]/div/a");
