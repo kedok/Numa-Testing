@@ -2,9 +2,9 @@ Feature: Testing Stratio page
 
   Scenario: Open Stratio Page and get Governance use case tittle
     Given browser initiated
-    And google cookies accepted
-    When user types Stratio in search bar and press enter
-    Then shows all results of Stratio
+#    And google cookies accepted
+#    When user types Stratio in search bar and press enter
+#    Then shows all results of Stratio
 
   Scenario: Open Stratio Home page
     Given browser initiated
