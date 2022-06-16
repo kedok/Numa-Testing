@@ -107,6 +107,25 @@ letter and without one number
 &emsp;`Then` error pop up appears with the message "The user does not meet the requirements"
 <br></br>
 
+`Scenario:` Blank user form
+
+&emsp;`Given` I not enter a user
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "You need to enter a user/email"
+<br></br>
+
+`Scenario:` Blank password form
+
+&emsp;`Given` I enter a valir user
+
+&emsp;`And` I not enter a password
+
+&emsp;`When` I click on login button
+
+&emsp;`Then` error pop up appears with the message "You need to enter a password"
+
 ## Ejercicio 2: Selenium testing & BDD
 
 En el siguiente ejercicio práctico nos vamos a poner en la piel de un QA enfrentándose a la automatización de tests con
