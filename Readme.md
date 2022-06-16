@@ -50,8 +50,10 @@ notación Gherkin, por ejemplo:
 
 &emsp;`Given` I enter an email which contains @ and ends with .com
 
-&emsp;`And` I enter a password which length is between 6 and 8 characters and contains at least one capital letter, one
+
+&emsp;`And` I enter a password which length is between 6 and 18 characters and contains at least one capital letter, one
 lowercase and one number
+
 
 &emsp;`When` I click on login button
 
@@ -88,8 +90,10 @@ lowercase and one number
 
 &emsp;`Given` I enter user which is already registered in the system
 
+
 &emsp;`And` I enter a password which contains less than 6 characters or more than 18 characters, without one capital
 letter and without one number
+
 
 &emsp;`When` I click on login button
 
