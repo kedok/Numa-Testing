@@ -1,6 +1,6 @@
 package es.stratio.numatesting.steps;
 
-import es.stratio.numatesting.browsers.BrowserDriverFirefox;
+import es.stratio.numatesting.browsers.BrowserDriverChrome;
 import es.stratio.numatesting.page_objects.GooglePage;
 import es.stratio.numatesting.page_objects.GoogleSearchResultPage;
 import es.stratio.numatesting.page_objects.GovernancePage;
@@ -14,25 +14,12 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StratioSteps {
-<<<<<<< HEAD
-    By button_accept_cookies_google = By.xpath("//div[text()='Acepto']/ancestor::button");
-    By button_accept_cookies_stratio = By.xpath("//div[@class='controls']/button[1]");
-    By stratio_first_link = By.xpath("//h3/ancestor::a");
-    By dropdown_solutions_stratio = By.xpath("//div[text()=' Solutions']");
-    By governance_dropdown = By.xpath("//div[text()=' By use case ']/ancestor::div[1]/div[4]");
-    By first_use_case = By.xpath("//section[3]/div/a");
-    By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
+
     WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
-    FluentWait wait = new FluentWait(webDriver);
-=======
-
-
-    WebDriver webDriver = BrowserDriverFirefox.getFirefox();
     GooglePage googlePage = new GooglePage(webDriver);
     GoogleSearchResultPage googleSearchResultPage = new GoogleSearchResultPage(webDriver);
     StratioPage stratioPage = new StratioPage(webDriver);
     GovernancePage governancePage = new GovernancePage(webDriver);
->>>>>>> cea534a5e59e9c7ff85f2f13e7dd30b707c09ecf
 
     @Given("browser initiated")
     public void googleIniciado() {
