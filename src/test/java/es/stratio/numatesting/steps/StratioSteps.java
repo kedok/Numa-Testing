@@ -1,23 +1,20 @@
 package es.stratio.numatesting.steps;
 
-import es.stratio.numatesting.browsers.BrowserDriverChrome;
+import es.stratio.numatesting.browsers.BrowserDriverFirefox;
+import es.stratio.numatesting.page_objects.GooglePage;
+import es.stratio.numatesting.page_objects.GoogleSearchResultPage;
+import es.stratio.numatesting.page_objects.GovernancePage;
+import es.stratio.numatesting.page_objects.StratioPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-
-import java.time.Duration;
-import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StratioSteps {
+<<<<<<< HEAD
     By button_accept_cookies_google = By.xpath("//div[text()='Acepto']/ancestor::button");
     By button_accept_cookies_stratio = By.xpath("//div[@class='controls']/button[1]");
     By stratio_first_link = By.xpath("//h3/ancestor::a");
@@ -27,76 +24,81 @@ public class StratioSteps {
     By tittle_of_first_element_of_use_case = By.xpath("//main//h1");
     WebDriver webDriver = BrowserDriverChrome.getChromeDriver();
     FluentWait wait = new FluentWait(webDriver);
+=======
+
+
+    WebDriver webDriver = BrowserDriverFirefox.getFirefox();
+    GooglePage googlePage = new GooglePage(webDriver);
+    GoogleSearchResultPage googleSearchResultPage = new GoogleSearchResultPage(webDriver);
+    StratioPage stratioPage = new StratioPage(webDriver);
+    GovernancePage governancePage = new GovernancePage(webDriver);
+>>>>>>> cea534a5e59e9c7ff85f2f13e7dd30b707c09ecf
 
     @Given("browser initiated")
     public void googleIniciado() {
-        webDriver.get("https://www.google.es/");
-
+        googlePage.openPage("https://www.google.es/");
     }
 
     @And("google cookies accepted")
-    public void cookiesAceptadas() {
-        webDriver.findElement(button_accept_cookies_google).click();
-
+    public void cookiesAceptadas() throws InterruptedException {
+        Thread.sleep(1000);
+        googlePage.accept_cookies();
 
     }
 
     @When("user types Stratio in search bar and press enter")
-    public void userTypesStratioInSearchBarAndPressEnter() {
-        WebElement search_bar_element = this.webDriver.findElement(By.name("q"));
-        search_bar_element.sendKeys("Stratio");
-        search_bar_element.sendKeys(Keys.ENTER);
+    public void userTypesStratioInSearchBarAndPressEnter() throws InterruptedException {
+        Thread.sleep(1000);
+        googlePage.search("Stratio");
     }
 
     @Then("shows all results of Stratio")
-    public void showsAllResultsOfStratio() {
-        assertEquals("https://www.stratio.com/", webDriver.findElement(stratio_first_link).getAttribute("href"));
+    public void showsAllResultsOfStratio() throws InterruptedException {
+        Thread.sleep(1000);
+        assertEquals("https://www.stratio.com/", googlePage.getLink(googleSearchResultPage.getStratio_first_link()));
     }
 
 
     @When("user click first link")
     public void userClickFirstLink() {
-        webDriver.findElement(stratio_first_link).click();
+        googleSearchResultPage.click_on_first_result();
     }
 
     @And("accept stratio cookies")
     public void acceptStratioCookies() {
-        webDriver.findElement(button_accept_cookies_stratio).click();
+        stratioPage.accept_cookies();
     }
 
     @Then("show Stratio Home page")
     public void showStratioHomePage() {
-        assertEquals("Stratio ::Transform and build your digital strategy around Big Data and AI", webDriver.getTitle());
+        assertEquals("Stratio ::Transform and build your digital strategy around Big Data and AI", stratioPage.getTitle());
     }
 
 
     @When("user click the dropdown Solutions")
-    public void userClickTheDropdownSolutions() {
-        webDriver.findElement(dropdown_solutions_stratio).click();
+    public void userClickTheDropdownSolutions() throws InterruptedException {
+        Thread.sleep(2000);
+        stratioPage.dropdown_solutions();
     }
 
     @And("user select Governance from the dropdown")
-    public void userSelectGovernanceFromTheDropdown() {
-        webDriver.findElement(governance_dropdown).click();
+    public void userSelectGovernanceFromTheDropdown() throws InterruptedException {
+        Thread.sleep(2000);
+        stratioPage.dropdown_solutions();
     }
 
     @Then("Governance page loads")
-    public void governancePageLoads() {
-
-        wait.withTimeout(Duration.ofMillis(5000));
-        wait.pollingEvery(Duration.ofMillis(250));
-        wait.ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.titleIs("Stratio :: Data reliability is the base of successful companies"));
-
-
-        assertEquals("https://www.stratio.com/solutions/by-use-case/governance", webDriver.getCurrentUrl());
+    public void governancePageLoads() throws InterruptedException {
+        Thread.sleep(1500);
+        stratioPage.governance_dropdown();
+        Thread.sleep(1500);
+        assertEquals("https://www.stratio.com/solutions/by-use-case/governance", stratioPage.getUrl());
     }
 
     @And("print first case title")
     public void printFirstCaseTitle() {
-        webDriver.findElement(first_use_case).click();
-        wait.until(ExpectedConditions.titleIs("Stratio :: Real-time replica of Core banking data with business meaning, QR and governance"));
-        System.out.println(webDriver.findElement(tittle_of_first_element_of_use_case).getAccessibleName());
+        governancePage.click_first_use_case();
+        System.out.println(governancePage.getTitle());
     }
 
 

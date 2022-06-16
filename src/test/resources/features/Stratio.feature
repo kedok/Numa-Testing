@@ -15,7 +15,7 @@ Feature: Testing Stratio page
     And accept stratio cookies
     Then show Stratio Home page
 
-  Scenario: Open First Use Case from dropdown
+  Scenario: Test Stratio Page
     Given browser initiated
     And google cookies accepted
     And user types Stratio in search bar and press enter
